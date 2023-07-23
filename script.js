@@ -2,7 +2,7 @@
 
 $(document).ready(function () {
 
-  //Pulls the current date
+  //Current date
   let NowMoment = moment().format("l");
   
   //adds days to moment for forecast
@@ -15,21 +15,21 @@ $(document).ready(function () {
  //global variables
   let city;
   let cities;
- //function to load most recently searched city from local storage
+ //load most recently searched city from local storage
   function loadMostRecent() {
     let lastSearch = localStorage.getItem("mostRecent");
     if (lastSearch) {
       city = lastSearch;
       search();
     } else {
-      city = "Seattle";
+      city = "Kingman";
       search();
     }
   }
 
   loadMostRecent()
 
-//function to load recently searched cities from local storage
+//load recently searched cities from local storage
   function loadRecentCities() {
     let recentCities = JSON.parse(localStorage.getItem("cities"));
 
@@ -51,14 +51,14 @@ $(document).ready(function () {
     listCities();
   });
 
-  //function to save searched cities to local storage
+  //save searched cities to local storage
   function saveToLocalStorage() {
     localStorage.setItem("mostRecent", city);
     cities.push(city);
     localStorage.setItem("cities", JSON.stringify(cities));
   }
 
-  //function to retrieve user inputted city name
+  //retrieve user inputed city name
   function getCity() {
     city = $("#city-input").val();
     if (city && cities.includes(city) === false) {
@@ -70,7 +70,7 @@ $(document).ready(function () {
   }
 
 
-  // searches the API for the chosen city
+  // searches API for the chosen city
   function search() {
     
     let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=42d98d76405f5b8038f2ad71187af430";
@@ -108,7 +108,7 @@ $(document).ready(function () {
       alert("Could not get data")
     });
 
-    //Function to get 5-day forecast and UV index and put them on page
+    //Function to get 5-day forecast and put on page
     function getUV(lat, lon) {
      
         
@@ -118,17 +118,17 @@ $(document).ready(function () {
       }).then(function (response) {
 
         //code to determine UV index severity
-        let uvIndex = response.current.uvi;
-        $("#uv-index").text("UV Index:" + " " + uvIndex);
-        if (uvIndex >= 8) {
-          $("#uv-index").css("color", "red");
-        } else if (uvIndex > 4 && uvIndex < 8) {
-          $("#uv-index").css("color", "yellow");
-        } else {
-          $("#uv-index").css("color", "green");
-        }
-        let cityHigh = response.daily[0].temp.max;
-        $("#high").text("Expected high (F): " + " " + cityHigh);
+        // let uvIndex = response.current.uvi;
+        // $("#uv-index").text("UV Index:" + " " + uvIndex);
+        // if (uvIndex >= 8) {
+        //   $("#uv-index").css("color", "red");
+        // } else if (uvIndex > 4 && uvIndex < 8) {
+        //   $("#uv-index").css("color", "yellow");
+        // } else {
+        //   $("#uv-index").css("color", "green");
+        // }
+        // let cityHigh = response.daily[0].temp.max;
+        // $("#high").text("Expected high (F): " + " " + cityHigh);
 
         //forecast temp variables
         let day1temp = response.daily[1].temp.max;
@@ -179,7 +179,7 @@ $(document).ready(function () {
       });
     }
   }
-//function to render recently searched cities to page
+//render recently searched cities
   function listCities() {
     $("#cityList").text("");
     cities.forEach((city) => {
@@ -188,20 +188,17 @@ $(document).ready(function () {
   }
 
   listCities();
-//event handler for recently searched cities in table
+//for recently searched cities in table
   $(document).on("click", "td", (e) => {
     e.preventDefault();
     let listedCity = $(e.target).text();
     city = listedCity;
     search();
   });
-//event handler for clear button
+//for clear button
   $("#clr-btn").click(() => {
     localStorage.removeItem("cities");
     loadRecentCities();
     listCities();
   });
 });
-
-
-//End of line

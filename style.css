@@ -3,15 +3,15 @@
   }
   
   #weather-data {
-    background-color: #75c0f5;
+    background-color: rgb(20, 209, 137);
   }
   
   .current-city-data {
-    min-height: 300px;
+    min-height: 250px;
   }
   
   .table-box {
-    background-color:#4b6584;
+    background-color: rgb(168, 0, 0);
   }
   
   tr {
@@ -19,27 +19,17 @@
   }
   
   .card {
-    background-color: #a5b1c2;
+    background-color: rgba(129, 7, 7, 0.829);
     margin: 3px;
     min-height: 300px;
   }
   
   .hero {
-    background: #fa8231; /* fallback for old browsers */
-    background: -webkit-linear-gradient(
-      to right,
-      #eb3b5a,
-      #fa8231
-    ); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(
-      to right,
-      #eb3b5a,
-      #fa8231
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: rgb(179, 13, 13);
   }
   
   .title {
-    color: #fff;
+    color: black;
   }
   
   #submit {
@@ -57,4 +47,8 @@
     .card-content {
       padding: 20px;
     }
+  }
+
+  #submit {
+    background-color: rgb(0, 0, 0);
   }
